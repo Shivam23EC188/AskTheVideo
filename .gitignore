@@ -1,6 +1,36 @@
+# Secrets
 .env
+.env.*
+!.env.example
+.streamlit/secrets.toml
+
+# Virtual environments
 .venv/
 .venv-1/
+venv/
+
+# Python
 __pycache__/
 *.pyc
+
+# Generated data (adjust names to match your code)
+downloads/
 downloades/
+chroma_db/
+vector_store/
+*.mp3
+*.wav
+*.mp4
+*.mkv
+*.webm
+*.m4a
+
+# Logs and temp
+*.log
+tmp/
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

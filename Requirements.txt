@@ -1,44 +1,41 @@
-# ── AI Meeting Assistant ── requirements.txt ──────────────────────────────────
+# ── AI Video Assistant ── requirements.txt ────────────────────────────────────
 # Python >= 3.10 recommended
+# Install:  pip install -r requirements.txt
+# Also needed (not a pip package): the FFmpeg binary must be installed and on PATH.
 
-# ── Audio / Video acquisition ─────────────────────────────────────────────────
+# ── Audio / video acquisition ─────────────────────────────────────────────────
 yt-dlp>=2024.4.9                  # Download audio from YouTube URLs
-pydub>=0.25.1                     # Audio file manipulation / format conversion
-ffmpeg-python>=0.2.0              # FFmpeg bindings (FFmpeg binary must be installed separately)
+pydub>=0.25.1                     # Audio chunking / format conversion
+ffmpeg-python>=0.2.0              # FFmpeg bindings
 
-# ── Speech-to-Text (local Whisper) ────────────────────────────────────────────
-openai-whisper>=20231117          # OpenAI Whisper (runs locally)
+# ── Speech-to-text (local Whisper) ────────────────────────────────────────────
+openai-whisper>=20231117          # Runs locally; used for english
 torch>=2.2.0                      # PyTorch backend for Whisper
-torchaudio>=2.2.0                 # Audio utilities for PyTorch
+torchaudio>=2.2.0
 
-# ── Translation (Hindi → English) ─────────────────────────────────────────────
-deep-translator>=1.11.4           # Lightweight translation wrapper (Google backend)
+# ── Translation / Hinglish support ────────────────────────────────────────────
+deep-translator>=1.11.4           # Hindi -> English translation wrapper
+requests>=2.32.0                  # HTTP calls (Sarvam AI, Groq model listing)
 
-# ── LLM Orchestration — LangChain LCEL + Mistral ──────────────────────────────
+# ── LLM orchestration: LangChain + Groq ───────────────────────────────────────
 langchain>=0.2.0
 langchain-core>=0.2.0
 langchain-community>=0.2.0
-langchain-mistralai>=0.1.0        # LangChain wrapper for Mistral API
-mistralai>=0.4.0                  # Official Mistral Python client
+langchain-text-splitters>=0.2.0   # RecursiveCharacterTextSplitter (imported directly)
+langchain-groq>=0.2.0             # Groq chat models
 
-# ── RAG Pipeline ──────────────────────────────────────────────────────────────
+# ── RAG pipeline ──────────────────────────────────────────────────────────────
 chromadb>=0.5.0                   # Local vector store
-sentence-transformers>=3.0.0      # HuggingFace embedding models
-langchain-huggingface>=0.0.3      # LangChain ↔ HuggingFace embeddings bridge
-huggingface-hub>=0.23.0           # Model downloading from HuggingFace Hub
-tiktoken>=0.7.0                   # Token counting for text splitting
+langchain-chroma>=0.2.0
+sentence-transformers>=3.0.0      # Local embedding models
+langchain-huggingface>=0.0.3
+huggingface-hub>=0.23.0
 
-# ── Streamlit UI ──────────────────────────────────────────────────────────────
-streamlit>=1.35.0
-streamlit-extras>=0.4.0           # Additional Streamlit widgets / utilities
-watchdog>=4.0.0                   # File-change watcher (improves Streamlit hot-reload)
-
-# ── PDF & TXT Export ──────────────────────────────────────────────────────────
-reportlab>=4.2.0                  # PDF generation
-fpdf2>=2.7.9                      # Lightweight alternative PDF library
+# ── UI ────────────────────────────────────────────────────────────────────────
+streamlit>=1.35.0                 # st.status, st.chat_input, bordered containers
+watchdog>=4.0.0                   # Faster Streamlit hot-reload
 
 # ── Utilities ─────────────────────────────────────────────────────────────────
 python-dotenv>=1.0.0              # Load API keys from .env
 numpy>=1.26.0
-tqdm>=4.66.0                      # Progress bars
-requests>=2.32.0
+tqdm>=4.66.0
